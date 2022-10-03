@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<LangVersion>10</LangVersion>
+		<RootNamespace>JinnDev.$(MSBuildProjectName)</RootNamespace>
+		<AssemblyName>JinnDev.$(MSBuildProjectName)</AssemblyName>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<nullable>enable</nullable>
+		<Authors>JinnDev</Authors>
+		<Company>Jinn Studios</Company>
+		<Product>Twitter Stream Tracker</Product>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Twitter.Core\Twitter.Core.csproj" />
+    <ProjectReference Include="..\Twitter.Data.Core\Twitter.Data.Core.csproj" />
+  </ItemGroup>
+
+</Project>
