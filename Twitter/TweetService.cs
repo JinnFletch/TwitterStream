@@ -7,7 +7,7 @@ using JinnDev.Twitter.FunctionalCore;
 
 namespace JinnDev.Twitter
 {
-    public partial class TweetService : ITweetService
+    public class TweetService : ITweetService
     {
         private readonly ITweetRepo _repo;
 
