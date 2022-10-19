@@ -15,9 +15,10 @@ namespace JinnDev.Twitter.Data
             Interlocked.Increment(ref _tweetsReceived);
             if (tweet.Hashtags != null)
             {
-                var hashtags = JsonSerializer.Deserialize<List<string>>(tweet.Hashtags)!;
-                for (var i = 0; i < hashtags.Count; i++)
-                    _topHashtags.AddOrUpdate(hashtags[i], 0, (y, z) => z + 1);
+                var hashtags = JsonSerializer.Deserialize<List<string>>(tweet.Hashtags);
+                if (hashtags != null)
+                    for (var i = 0; i < hashtags.Count; i++)
+                        _topHashtags.AddOrUpdate(hashtags[i], 0, (y, z) => z + 1);
             }
             return Task.CompletedTask;
         }

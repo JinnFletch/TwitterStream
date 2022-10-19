@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using JinnDev.Twitter.FunctionalCore;
+using Xunit;
 
 namespace JinnDev.Twitter.Tests
 {
@@ -30,13 +31,25 @@ namespace JinnDev.Twitter.Tests
         [InlineData("これはダメ#ハッシュタグ", null)]
         [InlineData("#1 Random # Hashtag ", null)]
         [InlineData("#2", null)]
-        public void GetValidHashtags(string input, string expected)
+        public void GetValidHashtag(string input, string expected)
         {
-            var result = TweetService.GetValidHashtags(input);
+            var result = HashtagService.GetValidHashtags(input);
             if (expected == null)
                 Assert.Empty(result);
             else
                 Assert.Equal(expected, result.Single());
+        }
+
+        [Theory]
+        [InlineData("#startingHashtag Random # Hashtag #hashtag", "#startingHashtag", "#hashtag")]
+        [InlineData("# spaces here Random #CaseSensitive #casesensitive", "#CaseSensitive", "#casesensitive")]
+        [InlineData("something #hashtag1, comma#midArea, #hashtag2", "#hashtag1", "#hashtag2")]
+        public void GetValidHashtags(string input, params string[] expecteds)
+        {
+            var result = HashtagService.GetValidHashtags(input);
+            Assert.Equal(expecteds.Length, result.Count);
+            foreach (var expected in expecteds)
+                Assert.Contains(expected, result);
         }
     }
 }

@@ -19,9 +19,10 @@ namespace JinnDev.Twitter.API
 
             sc.AddHostedService(x =>
             {
+                var streamEndpoint = config.GetValue<string>("StreamEndpoint");
                 var factory = x.GetRequiredService<IHttpClientFactory>();
                 var client = factory.CreateClient(nameof(TwitterStreamService));
-                return new TwitterStreamService(x.GetRequiredService<ITweetService>(), client, x.GetRequiredService<ILogger<TwitterStreamService>>());
+                return new TwitterStreamService(x.GetRequiredService<ITweetService>(), client,streamEndpoint, x.GetRequiredService<ILogger<TwitterStreamService>>());
             });
         }
     }

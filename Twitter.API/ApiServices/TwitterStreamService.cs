@@ -11,12 +11,14 @@ namespace JinnDev.Twitter.API
 
         private readonly ITweetService _svc;
         private readonly HttpClient _client;
+        private readonly string _streamEndpoint;
         private readonly ILogger _logger;
 
-        public TwitterStreamService(ITweetService svc, HttpClient client, ILogger<TwitterStreamService> logger)
+        public TwitterStreamService(ITweetService svc, HttpClient client, string streamEndpoint, ILogger<TwitterStreamService> logger)
         {
             _svc = svc;
             _client = client;
+            _streamEndpoint = streamEndpoint;
             _logger = logger;
         }
 
@@ -26,7 +28,7 @@ namespace JinnDev.Twitter.API
             {
                 try
                 {
-                    using var response = await _client.GetAsync("https://api.twitter.com/2/tweets/sample/stream", HttpCompletionOption.ResponseHeadersRead, stoppingToken);
+                    using var response = await _client.GetAsync(_streamEndpoint, HttpCompletionOption.ResponseHeadersRead, stoppingToken);
                     using var responseStream = await response.Content.ReadAsStreamAsync(stoppingToken);
                     using var reader = new StreamReader(responseStream);
                     while (false == reader.EndOfStream)

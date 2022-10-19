@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace JinnDev.Twitter
+namespace JinnDev.Twitter.FunctionalCore
 {
-    public partial class TweetService
+    public class HashtagService
     {
         const string HASHTAG_LETTERS = @"\p{L}\p{M}";
         const string HASHTAG_NUMERALS = @"\p{Nd}";

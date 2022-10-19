@@ -3,6 +3,7 @@ using JinnDev.Twitter.Models;
 using System.Text.Json;
 using JinnDev.Twitter.Data.Core;
 using JinnDev.Twitter.Data.Entities;
+using JinnDev.Twitter.FunctionalCore;
 
 namespace JinnDev.Twitter
 {
@@ -17,7 +18,7 @@ namespace JinnDev.Twitter
 
         public async Task ProcessTweet(TweetModel tweet)
         {
-            var hashtags = GetValidHashtags(tweet.Content);
+            var hashtags = HashtagService.GetValidHashtags(tweet.Content);
             var tweetEntity = new TweetEntity
             {
                 Id = tweet.TweetID,
